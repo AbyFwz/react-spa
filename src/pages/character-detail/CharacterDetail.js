@@ -1,70 +1,48 @@
 import React, { useEffect, useState } from 'react'
-import { Button, ButtonGroup, Col, Container, Figure, Row } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom'
+import { Col, Row } from 'react-bootstrap';
+import { useParams } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch';
-import ModalLocation from '../../components/modal/ModalLocation';
 import Loading from '../../components/loading/Loading';
+import Cards from '../../components/card';
 
 function CharacterDetail() {
     const fetch = useFetch();
-    const navigate = useNavigate();
     const {id} = useParams();
-    console.log(id);
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [visModal, setVisModal] = useState(false);
-    // const {data} = useFetch({url: , method: "GET"});
-    // console.log(data);
 
-    const handleClose = () => {
-        setVisModal(false);
-    }
-
-    useEffect(() => {
+    const handleFetch = () => {
         setIsLoading(true);
-        fetch({url: `https://rickandmortyapi.com/api/character/${id}`, method: "GET"}).then((resp) => {
+        fetch(
+            {url: `https://rickandmortyapi.com/api/character/${id}`, method: "GET"}
+        ).then((resp) => {
+            console.log(resp.data)
             setData(resp.data);
             setIsLoading(false);
         }).catch((err) => {
+            console.log(err)
+            setData([]);
             setIsLoading(false);
         });
+    }
+
+    useEffect(() => {
+        handleFetch();
     }, [])
+
     return (
         <>
             {isLoading ?
                 <Loading />
             :
-                <Container fluid>
-                    <Row>
-                        <Col>
-                            <Figure>
-                                <Figure.Image
-                                    width={171}
-                                    height={180}
-                                    alt="171x180"
-                                    src={data.image}
-                                />
-                                <Figure.Caption>
-                                <span>Status: {data.status}<br/></span>
-                                    <span>Species: {data.species}<br/></span>
-                                    <span>Gender: {data.gender}<br/></span>
-                                    <span>Origin: {data.origin?.name}<br/></span>
-                                    <span>Location: {data.location?.name}<br/></span>
-                                </Figure.Caption>
-                            </Figure>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <ButtonGroup size='lg'>
-                                <Button variant='secondary' onClick={() => {navigate(-1)}}>Back</Button>
-                                <Button variant='success' onClick={() => {setVisModal(true);}}>Add Character to Location</Button>
-                            </ButtonGroup>
-                        </Col>
-                    </Row>
-
-                    {visModal && <ModalLocation show={visModal} handleClose={handleClose}/>}
-                </Container>
+                <Row>
+                    {/* <Col><span>{data.name}</span></Col> */}
+                    <Col>
+                        {data.length !== 0 ?
+                            <Cards id={data.id} image={data.image} name={data.name} status={data.status} species={data.species} gender={data.gender} origin={data.origin.name} location={data.location.name} desc={true} button={true}/>
+                        : <></> }
+                    </Col>
+                </Row>
             }
         </>
     )
