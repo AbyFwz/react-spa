@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-function useFetch({url, payload, method}) {
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const fetchData = () => {
-        axios({
-            method,
-            url,
-            data: {
-                payload
-            }
-        }).then((resp) => {
-            setData(resp.data.results);
-        }).catch((err) => {
-            return err;
-        });
-    };
+function useFetch() {
+    const fetch = ({url, method, payload}) => {
+        return new Promise((resolve, reject) => {
+            axios({
+                method,
+                url,
+                data: {
+                    payload
+                }
+            }).then((resp) => {
+                resolve(resp);
+            }).catch((err) => {
+                reject(err);
+            })
+        })
+    }
 
-    useEffect(() => {
-        fetchData();
-    }, [payload]);
-
-    return {data, isLoading};
+    return fetch;
 }
 
 export default useFetch
