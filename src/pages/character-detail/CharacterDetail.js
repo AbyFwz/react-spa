@@ -16,11 +16,9 @@ function CharacterDetail() {
         fetch(
             {url: `https://rickandmortyapi.com/api/character/${id}`, method: "GET"}
         ).then((resp) => {
-            console.log(resp.data)
             setData(resp.data);
             setIsLoading(false);
         }).catch((err) => {
-            console.log(err)
             setData([]);
             setIsLoading(false);
         });
