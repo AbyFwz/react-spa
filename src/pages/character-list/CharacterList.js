@@ -10,7 +10,6 @@ function CharacterList() {
 
   const handleFetch = () => {
     fetch({url: "https://rickandmortyapi.com/api/character", method: "GET"}).then((resp) => {
-      console.log(resp)
       setData(resp.data.results);
     }).catch((err) => {
       setData([]);
@@ -27,7 +26,7 @@ function CharacterList() {
         {data?.map((item) => {
           return (
           <Col key={item.id} >
-            <Cards id={item.id} image={item.image} name={item.name} status={item.status} species={item.species} gender={item.gender} originName={item.origin.name} originUrl={item.origin.url} locationName={item.location.name} locationUrl={item.location.url} />
+            <Cards id={item.id} image={item.image} name={item.name} />
           </Col>)
         })}
       </Row>
