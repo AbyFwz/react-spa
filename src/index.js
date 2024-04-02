@@ -13,6 +13,7 @@ import CharacterLocation from './pages/character-by-location/';
 import Header from './components/header';
 import Footer from './components/footer';
 import { Col, Container, Row } from 'react-bootstrap';
+import { LocalStorageProvider } from './contexts/LocalStorageContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // const router = createBrowserRouter([
@@ -31,26 +32,28 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // ]);
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Container>
-        <Row>
-          <Col><Header /></Col>
-        </Row>
-        <Row>
-          <Col xs="auto" sm="auto" md="auto" lg="auto" xl="auto">
+    <LocalStorageProvider>
+      <BrowserRouter>
+        <Container className='contact-content debug-border'>
+          <Row>
+            <Col><Header /></Col>
+          </Row>
+          <Row className='justify-content-center align-items-center d-flex'>
+            <Col xs="auto" sm="auto" md="auto" lg="auto" xl="auto">
               <Routes>
                 <Route path="/" element={<CharacterList />} />
                 <Route path="/character-details/:id" element={<CharacterDetail />} />
                 <Route path="/character-locations" element={<CharacterLocation />} />
                 <Route path="/character-locations.details/:id" element={<CharacterLocation />} />
               </Routes>
-          </Col>
-        </Row>
-        <Row>
-          <Col><Footer /></Col>
-        </Row>
-      </Container>
-    </BrowserRouter>
+            </Col>
+          </Row>
+          <Row>
+            <Col><Footer /></Col>
+          </Row>
+        </Container>
+      </BrowserRouter>
+    </LocalStorageProvider>
   </React.StrictMode>
 );
 
