@@ -19,7 +19,7 @@ function CharacterList() {
 
   useEffect(() => {
     handleFetch();
-  }, [])
+  })
 
   return (
     <>
