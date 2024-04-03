@@ -9,7 +9,6 @@ function ModalLocation({ show, handleClose }) {
     const [data, setData] = useState([]);
     const [location, setLocation] = useState('');
     const [showPopup, setShowPopup] = useState(false);
-    const { storedData } = useLocalStorage();
     const setStoredData = useSetLocalStorage();
     const fetch = useFetch();
 
