@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
-import { useLocalStorage, useSetLocalStorage } from '../../contexts/LocalStorageContext';
+import { useSetLocalStorage } from '../../contexts/LocalStorageContext';
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
 
@@ -24,7 +24,7 @@ function ModalLocation({ show, handleClose }) {
 
     useEffect(() => {
         handleFetch();
-    }, [fetch])
+    }, [handleFetch])
 
     const handleSetData = () => {
         if (!location) {
