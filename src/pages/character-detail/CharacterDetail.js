@@ -26,7 +26,7 @@ function CharacterDetail() {
 
     useEffect(() => {
         handleFetch();
-    }, [])
+    }, [handleFetch])
 
     return (
         <>
