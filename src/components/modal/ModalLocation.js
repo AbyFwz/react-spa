@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { useSetLocalStorage } from '../../contexts/LocalStorageContext';
 import { useParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ function ModalLocation({ show, handleClose }) {
     const setStoredData = useSetLocalStorage();
     const fetch = useFetch();
 
-    const handleFetch = async () => {
+    const handleFetch = useCallback(async () => {
         try {
             const response = await fetch({ url: "https://rickandmortyapi.com/api/location", method: "GET" });
             setData(response.data.results);
@@ -20,11 +20,11 @@ function ModalLocation({ show, handleClose }) {
             console.error("Error fetching location data:", error);
             setData([]);
         }
-    }
+    }, [fetch]);
 
     useEffect(() => {
         handleFetch();
-    }, [handleFetch])
+    }, [handleFetch]);
 
     const handleSetData = () => {
         if (!location) {
