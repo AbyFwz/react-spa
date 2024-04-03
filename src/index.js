@@ -14,6 +14,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import { Col, Container, Row } from 'react-bootstrap';
 import { LocalStorageProvider } from './contexts/LocalStorageContext';
+import MyComponent from './pages/testing/MyComponent';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // const router = createBrowserRouter([
@@ -45,6 +46,7 @@ root.render(
                 <Route path="/character-details/:id" element={<CharacterDetail />} />
                 <Route path="/character-locations" element={<CharacterLocation />} />
                 <Route path="/character-locations.details/:id" element={<CharacterLocation />} />
+                <Route path="/testing" element={<MyComponent />} />
               </Routes>
             </Col>
           </Row>
