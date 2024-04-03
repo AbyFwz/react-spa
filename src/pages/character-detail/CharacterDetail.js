@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch';
@@ -11,22 +11,22 @@ function CharacterDetail() {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleFetch = () => {
+    const handleFetch = useCallback(() => {
         setIsLoading(true);
-        fetch(
-            {url: `https://rickandmortyapi.com/api/character/${id}`, method: "GET"}
-        ).then((resp) => {
-            setData(resp.data);
-            setIsLoading(false);
-        }).catch((err) => {
-            setData([]);
-            setIsLoading(false);
-        });
-    }
+        fetch({url: `https://rickandmortyapi.com/api/character/${id}`, method: "GET"})
+            .then((resp) => {
+                setData(resp.data);
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                setData([]);
+                setIsLoading(false);
+            });
+    }, [fetch, setData, id]);
 
     useEffect(() => {
         handleFetch();
-    }, [handleFetch])
+    }, [handleFetch]);
 
     return (
         <>
@@ -46,4 +46,4 @@ function CharacterDetail() {
     )
 }
 
-export default CharacterDetail
+export default CharacterDetail;
