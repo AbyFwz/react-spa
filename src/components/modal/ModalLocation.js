@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { useLocalStorage, useSetLocalStorage } from '../../contexts/LocalStorageContext';
 import { useParams } from 'react-router-dom';
@@ -25,11 +25,12 @@ function ModalLocation({ show, handleClose }) {
 
     useEffect(() => {
         handleFetch();
-    }, [])
+    }, [fetch])
 
     const handleSetData = () => {
         if (!location) {
             // Handle case where location is not selected
+            alert("Please select a location");
             return;
         }
         setStoredData(id, location);
@@ -76,4 +77,4 @@ function ModalLocation({ show, handleClose }) {
     )
 }
 
-export default ModalLocation
+export default ModalLocation;

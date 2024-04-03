@@ -1,7 +1,7 @@
 /* React Mandatory */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Router, Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 /* Stylesheet */
 import './index.css';
