@@ -5,11 +5,12 @@ import ModalLocation from '../modal/ModalLocation';
 
 function Cards({id, image, name, status, species, gender, origin, location, desc, button}) {
     const navigate = useNavigate();
+    const [visModal, setVisModal] = useState(false);
     const [isContainDesc, setIsContainDesc] = useState(false);
 
-    const [visModal, setVisModal] = useState(false);
-    // const {data} = useFetch({url: , method: "GET"});
-    // console.log(data);
+    useEffect(() => {
+        setIsContainDesc(desc);
+    }, [desc, setVisModal]);
 
     const handleClose = () => {
         setVisModal(false);
@@ -21,7 +22,7 @@ function Cards({id, image, name, status, species, gender, origin, location, desc
                 <Card.Img variant="top" src={image} />
                 <Card.Body>
                     <Card.Title><center>{name}</center></Card.Title>
-                    {desc ?
+                    {isContainDesc ?
                         <Card.Text className='justify-content-left align-items-left'>
                             <span>Status: {status}<br/></span>
                             <span>Species: {species}<br/></span>
